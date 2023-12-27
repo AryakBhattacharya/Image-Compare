@@ -3,11 +3,11 @@ import cv2
 import numpy as np
 
 def upload_images():
-    st.sidebar.write("Upload the first image:")
-    uploaded_file1 = st.sidebar.file_uploader("Choose a file", key="file1")
+    st.write("Upload the first image:")
+    uploaded_file1 = st.file_uploader("Choose a file", key="file1")
 
-    st.sidebar.write("Upload the second image:")
-    uploaded_file2 = st.sidebar.file_uploader("Choose a file", key="file2")
+    st.write("Upload the second image:")
+    uploaded_file2 = st.file_uploader("Choose a file", key="file2")
 
     return uploaded_file1, uploaded_file2
 
