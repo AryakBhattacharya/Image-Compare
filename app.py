@@ -4,12 +4,13 @@ import numpy as np
 
 def upload_images():
     st.write("Upload the first image:")
-    image1 = st.file_uploader("Choose a file")
+    uploaded_file1 = st.file_uploader("Choose a file")
 
     st.write("Upload the second image:")
-    image2 = st.file_uploader("Choose a file")
+    uploaded_file2 = st.file_uploader("Choose a file")
 
-    return image1, image2
+    return uploaded_file1, uploaded_file2
+
 
 def compare_images(image1, image2):
     if image1 is None or image2 is None:
@@ -41,10 +42,10 @@ def compare_images(image1, image2):
 
 def main():
     st.title("Image Similarity Comparison")
-    image1, image2 = upload_images()
+    uploaded_file1, uploaded_file2 = upload_images()
 
     if st.button("Compare Images"):
-        similarity = compare_images(image1, image2)
+        similarity = compare_images(uploaded_file1, uploaded_file2)
 
         if similarity is not None:
             st.success(f"Similarity between the two images: {similarity:.2%}")
