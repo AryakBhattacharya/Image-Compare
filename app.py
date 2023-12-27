@@ -4,10 +4,10 @@ import numpy as np
 
 def upload_images():
     st.sidebar.write("Upload the first image:")
-    uploaded_file1 = st.sidebar.file_uploader("Choose a file")
+    uploaded_file1 = st.sidebar.file_uploader("Choose a file", key="file1")
 
     st.sidebar.write("Upload the second image:")
-    uploaded_file2 = st.sidebar.file_uploader("Choose a file")
+    uploaded_file2 = st.sidebar.file_uploader("Choose a file", key="file2")
 
     return uploaded_file1, uploaded_file2
 
@@ -41,22 +41,10 @@ def compare_images(uploaded_file1, uploaded_file2):
 
 def main():
     st.title("Image Similarity Comparison")
-
-    # Explicitly clear the Streamlit state to avoid DuplicateWidgetID error
-    session_state = st.session_state
-    if hasattr(session_state, "uploaded_file1"):
-        del session_state.uploaded_file1
-    if hasattr(session_state, "uploaded_file2"):
-        del session_state.uploaded_file2
-
     uploaded_file1, uploaded_file2 = upload_images()
 
-    # Store the uploaded files in session state
-    session_state.uploaded_file1 = uploaded_file1
-    session_state.uploaded_file2 = uploaded_file2
-
-    if st.button("Compare Images"):
-        similarity = compare_images(session_state.uploaded_file1, session_state.uploaded_file2)
+    if st.button("Compare Images"):  # Only run image comparison when button is clicked
+        similarity = compare_images(uploaded_file1, uploaded_file2)
 
         if similarity is not None:
             st.success(f"Similarity between the two images: {similarity:.2%}")
