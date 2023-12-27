@@ -3,23 +3,22 @@ import cv2
 import numpy as np
 
 def upload_images():
-    st.write("Upload the first image:")
-    uploaded_file1 = st.file_uploader("Choose a file")
+    st.sidebar.write("Upload the first image:")
+    uploaded_file1 = st.sidebar.file_uploader("Choose a file")
 
-    st.write("Upload the second image:")
-    uploaded_file2 = st.file_uploader("Choose a file")
+    st.sidebar.write("Upload the second image:")
+    uploaded_file2 = st.sidebar.file_uploader("Choose a file")
 
     return uploaded_file1, uploaded_file2
 
-
-def compare_images(image1, image2):
-    if image1 is None or image2 is None:
+def compare_images(uploaded_file1, uploaded_file2):
+    if uploaded_file1 is None or uploaded_file2 is None:
         st.error("Please upload both images.")
         return None
 
     # Read the images in color
-    img1_color = cv2.imdecode(np.frombuffer(image1.read(), np.uint8), -1)
-    img2_color = cv2.imdecode(np.frombuffer(image2.read(), np.uint8), -1)
+    img1_color = cv2.imdecode(np.frombuffer(uploaded_file1.read(), np.uint8), -1)
+    img2_color = cv2.imdecode(np.frombuffer(uploaded_file2.read(), np.uint8), -1)
 
     # Convert images to grayscale
     img1 = cv2.cvtColor(img1_color, cv2.COLOR_BGR2GRAY)
